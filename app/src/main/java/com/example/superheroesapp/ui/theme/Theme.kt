@@ -84,6 +84,7 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun SuperheroesAppTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = true,
     content: @Composable() () -> Unit
 ) {
     val colors = if (!useDarkTheme) {
@@ -94,6 +95,7 @@ fun SuperheroesAppTheme(
 
     MaterialTheme(
         colorScheme = colors,
+        typography = Typography,
         content = content
     )
 }
