@@ -48,7 +48,6 @@ private val LightColors = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
-
 private val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
@@ -83,19 +82,34 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun SuperheroesAppTheme(
-    useDarkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
-    content: @Composable() () -> Unit
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    // Dynamic color is available on Android 12+
+    // Dynamic color in this app is turned off for learning purposes
+    dynamicColor: Boolean = false,
+    content: @Composable () -> Unit
 ) {
-    val colors = if (!useDarkTheme) {
-        LightColors
-    } else {
-        DarkColors
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+
+        darkTheme -> DarkColors
+        else -> LightColors
+    }
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.statusBarColor = colorScheme.background.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+        }
     }
 
     MaterialTheme(
-        colorScheme = colors,
+        colorScheme = colorScheme,
         typography = Typography,
+        shapes = Shapes,
         content = content
     )
 }

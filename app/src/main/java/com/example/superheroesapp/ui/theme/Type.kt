@@ -10,7 +10,7 @@ import com.example.superheroesapp.R
 
 // the font families from the resources
 val Cabin = FontFamily(
-    Font(R.font.cabin_regular),
+    Font(R.font.cabin_regular, FontWeight.Normal),
     Font(R.font.cabin_bold, FontWeight.Bold)
 )
 
@@ -21,30 +21,23 @@ val Typography = Typography(
         fontFamily = Cabin,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
     ),
-//    bodyLarge = TextStyle(
-//        fontFamily = FontFamily.Default,
-//        fontWeight = FontWeight.Normal,
-//        fontSize = 16.sp,
-//        lineHeight = 24.sp,
-//        letterSpacing = 0.5.sp
-//    ),
     displayLarge = TextStyle(
         fontFamily = Cabin,
         fontWeight = FontWeight.Normal,
-        fontSize = 36.sp
+        fontSize = 30.sp
     ),
     displayMedium = TextStyle(
         fontFamily = Cabin,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp
     ),
-    labelSmall = TextStyle(
+    displaySmall = TextStyle(
         fontFamily = Cabin,
         fontWeight = FontWeight.Bold,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    ),
+        fontSize = 20.sp
+    )
 
 )
